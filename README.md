@@ -35,6 +35,7 @@ https://www.youtube.com/watch?v=sizFK8IugYw
 - [Komponen Yang Digunakan](#Komponen-Yang-Digunakan)
 - [Alat](#Alat)
 - [Hardware](#Hardware)
+- [Software](#Software)
  
 ## Komponen Yang Digunakan
 1. **Hardware**<br>
