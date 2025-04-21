@@ -1,1 +1,83 @@
-Arduio
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include <DallasTemperature.h>
+#include <OneWire.h>
+#include "MAX30100_PulseOximeter.h"
+
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+
+// DS18B20 setup
+#define ONE_WIRE_BUS 2
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
+
+// MAX30100 setup
+PulseOximeter pox;
+uint32_t lastReport = 0;
+float bpm = 0;
+float spo2 = 0;
+
+void onBeatDetected() {
+  Serial.println("Detak terdeteksi!");
+}
+
+void setup() {
+  Serial.begin(9600);
+  sensors.begin();
+
+  // OLED
+  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+    Serial.println("OLED gagal");
+    while (1);
+  }
+
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+
+  // MAX30100
+  if (!pox.begin()) {
+    Serial.println("Sensor MAX30100 gagal");
+    while (1);
+  } else {
+    Serial.println("Sensor MAX30100 berhasil");
+  }
+
+  pox.setOnBeatDetectedCallback(onBeatDetected);
+}
+
+void loop() {
+  pox.update(); // Update data dari MAX30100
+
+  // Ambil data suhu
+  sensors.requestTemperatures();
+  float suhu = sensors.getTempCByIndex(0);
+
+  // Ambil BPM dan SpO2
+  bpm = pox.getHeartRate();
+  spo2 = pox.getSpO2();
+
+  // Tampilkan di OLED
+  display.clearDisplay();
+  display.setCursor(0, 0);
+  display.println("Monitoring Kesehatan");
+  display.println("---------------------");
+
+  display.print("Suhu: ");
+  display.print(suhu);
+  display.println(" C");
+
+  display.print("BPM: ");
+  if (bpm > 0) {
+    display.print(bpm);
+  } else {
+    display.print("Mengukur...");
+  }
+
+  display.display();
+
+  delay(1000); // Delay 1 detik
+}
