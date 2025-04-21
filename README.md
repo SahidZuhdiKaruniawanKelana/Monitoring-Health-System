@@ -23,4 +23,10 @@ Dengan bantuan teknologi pemantauan kesehatan dapat  dilakukan secara efisien se
 | 2123600054    | Sahid Zuhdi Karuniawan Kelana | Project Manager     | [Sahid](https://github.com/EzarPrasetya)
 | 2123600057    | Muhammad Ammar Tsaqif         | PCB Designer     |[Ammar](https://github.com/Yadnur)
 
-##
+## Preview Slide Presentasi
+
+https://www.canva.com/design/DAGlLzyWL-8/5bgNkGYzvLAk4_L8IqqjvA/edit
+
+## Link YouTube 
+Preview Video
+https://www.youtube.com/watch?v=sizFK8IugYw
