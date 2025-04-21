@@ -16,8 +16,8 @@ Dengan bantuan teknologi pemantauan kesehatan dapat  dilakukan secara efisien se
 ## Team Member : 
 |      NRP      |       Nama      |    Jobdesk    |   Akun |
 | :-----------:|:----------------:| :------------:| :-----:|
-| 2123600033    | Fiqinnajach Al Makhi          | 3D Designer       | [Fiqhin](https://github.com/Raditya-G)
-| 2123600038    | Akmal Aditya                  |   Software Developer | [Akmal](https://github.com/nataratungga)
+| 2123600033    | Fiqinnajach Al Makhi          | 3D Designer       | [Fiqhin](https://github.com/FIQHIN)
+| 2123600038    | Akmal Aditya                  |   Software Developer | [Akmal]()
 | 2123600045    | Farhan Bayu Pamungkas         |    Hardware Specialist      | [Farhan](https://github.com/parhanbayup)
 | 2123600049    | Dariel Afron Zah Maulana      | Software Developer | [Dariel](https://github.com/DarielAfronZahMaulana)
 | 2123600054    | Sahid Zuhdi Karuniawan Kelana | Project Manager     | [Sahid](https://github.com/EzarPrasetya)
