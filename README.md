@@ -7,3 +7,20 @@ Dalam rankaian ini komponen utama sensor DS18B20 dan MAX 30100 sebagai pendeteks
 
 Dengan bantuan teknologi pemantauan kesehatan dapat  dilakukan secara efisien sehingga dapat mengantisipasi berbagai penyakit atau kondisi tubuh sakit secara singkat. 
 
+## Support By :
+>- Dosen Pengampu : Akhmad Hendriawan ST., MT. (NIP.197501272002121003)
+>- Mata kuliah : Mikrokontroller 
+>- Program Studi : D4 Teknik Elektronika
+>- Politeknik Elektronika Negeri Surabaya<br>
+
+## Team Member : 
+|      NRP      |       Nama      |    Jobdesk    |   Akun |
+| :-----------:|:----------------:| :------------:| :-----:|
+| 2123600033    | Fiqinnajach Al Makhi          | 3D Designer       | [Fiqhin](https://github.com/Raditya-G)
+| 2123600038    | Akmal Aditya                  |   Software Developer | [Akmal](https://github.com/nataratungga)
+| 2123600045    | Farhan Bayu Pamungkas         |    Hardware Specialist      | [Farhan](https://github.com/Bismaap)
+| 2123600049    | Dariel Afron Zah Maulana      | Software Developer | [Dariel](https://github.com/NurRohmatHidayat)
+| 2123600054    | Sahid Zuhdi Karuniawan Kelana | Project Manager     | [Sahid](https://github.com/EzarPrasetya)
+| 2123600057    | Muhammad Ammar Tsaqif         | PCB Designer     |[Ammar](https://github.com/Yadnur)
+
+##
