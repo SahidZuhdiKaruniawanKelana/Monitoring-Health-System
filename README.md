@@ -33,20 +33,16 @@ https://www.youtube.com/watch?v=sizFK8IugYw
 
 ## Daftar Isi
 - [Komponen Yang Digunakan](#Komponen-Yang-Digunakan)
-- [Wiring Plan](#Wiring-Plan)
+- [Alat](#Alat)
 - [Hardware](#Hardware)
-- [Desain 3D](#Desain-3D)
-
  
 ## Komponen Yang Digunakan
 1. **Hardware**<br>
     a. Arduino UNo<br>
     b. Sensor DS18B20<br>
     c. Sensor MAX30100<br>
-    d. Kabel Jumper<br>
-    e. LCD I2C<br>
-    f. Bread Board<br>
-    g. LED display<br>
+    d. LCD I2C<br>
+    e. LED display<br>
 
 2. **Software**<br>
     a. Arduino ide<br>
@@ -56,6 +52,8 @@ https://www.youtube.com/watch?v=sizFK8IugYw
 3. **Alat**<br>
     a. Solder<br>
     b. Timah solder<br>
+    c. Kabel Jumper<br>
+    d.  Bread Board<br>
 
 
 
