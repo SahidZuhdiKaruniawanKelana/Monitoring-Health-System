@@ -1,4 +1,4 @@
-# Project 0
+# Cliniscan
 ## Monitoring-Health-System
 
 Proyek ini bertujuan untuk mengembangkan sistem pengecekan kesehatan tubuh untuk Smart Building, menggunakan komponen utama seperti Arduino, Sensor 30102, DS18B20, LCD 12C. Arduiino Uno bertindak sebagai mikroprosesor utama yang mengontrol komunikasi antar sensor dan perangkat, memungkinkan pemantauan dan pengontrolan secara real-time.
