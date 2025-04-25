@@ -25,7 +25,7 @@ Dengan bantuan teknologi pemantauan kesehatan dapat dilakukan secara efisien dan
 
 ## Preview Slide Presentasi
 
-https://www.canva.com/design/DAGlLzyWL-8/5bgNkGYzvLAk4_L8IqqjvA/edit
+https://www.canva.com/design/DAGlpKlKbUI/rwsxZAOyYzx1ZmiQSskNvg/edit?continue_in_browser=true
 
 ## Link YouTube 
 Preview Video
