@@ -61,8 +61,8 @@ https://www.youtube.com/watch?v=sizFK8IugYw
     d.  Bread Board<br>
 
 ## Wiring Plan<br>
-   >- img< src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/Screenshot%202025-04-20%20214454.png">
-   >- img< src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/Screenshot%202025-04-21%20203207.png">
+   >- <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/Screenshot%202025-04-20%20214454.png">
+   >- <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/Screenshot%202025-04-21%20203207.png">
 
 ## Program Cpp
    Berikut merupakan program utama dari project ini<br>
