@@ -39,6 +39,7 @@ https://www.youtube.com/watch?v=sizFK8IugYw
 - [Alat](#Alat)
 - [Hardware](#Hardware)
 - [Software](#Software)
+- [Wiring Plan](#Wiring-Plan)
  
 ## Komponen Yang Digunakan
 1. **Hardware**<br>
@@ -58,6 +59,10 @@ https://www.youtube.com/watch?v=sizFK8IugYw
     b. Timah solder<br>
     c. Kabel Jumper<br>
     d.  Bread Board<br>
+
+## Wiring Plan<br>
+   >- img< src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/Screenshot%202025-04-20%20214454.png">
+   >- img< src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/Screenshot%202025-04-21%20203207.png">
 
 ## Program Cpp
    Berikut merupakan program utama dari project ini<br>
