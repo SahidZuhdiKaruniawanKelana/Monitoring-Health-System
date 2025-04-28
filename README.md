@@ -61,7 +61,9 @@ https://www.youtube.com/watch?v=sizFK8IugYw
     d.  Bread Board<br>
 
 ## Wiring Plan<br>
+   >- Menggunakan Tinkercad
    >- <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/Screenshot%202025-04-20%20214454.png">
+   >- Menggunakan Fritzing
    >- <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/Screenshot%202025-04-21%20203207.png">
 
 ## Program Cpp
