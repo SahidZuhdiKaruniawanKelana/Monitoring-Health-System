@@ -40,6 +40,7 @@ https://www.youtube.com/watch?v=sizFK8IugYw
 - [Hardware](#Hardware)
 - [Software](#Software)
 - [Wiring Plan](#Wiring-Plan)
+- [Program Cpp](#Program-Cpp)
  
 ## Komponen Yang Digunakan
 1. **Hardware**<br>
