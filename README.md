@@ -41,6 +41,7 @@ https://www.youtube.com/watch?v=sizFK8IugYw
 - [Software](#Software)
 - [Wiring Plan](#Wiring-Plan)
 - [Program Cpp](#Program-Cpp)
+- [Design UI UX](#Design-UIUX)
  
 ## Komponen Yang Digunakan
 1. **Hardware**<br>
@@ -72,7 +73,7 @@ https://www.youtube.com/watch?v=sizFK8IugYw
    https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Program/Codingan%20final
 
 ## Design UI UX
-   https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Program/UI%20UX%20design%20.png
+ <img src= "https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Program/UI%20UX%20design%20.png">
 
 
 
