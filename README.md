@@ -81,11 +81,11 @@ https://www.youtube.com/watch?v=sizFK8IugYw
  <img src= "https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Program/UI%20UX%20design%20.png">
 
 ## 3D Design
-   >- Tampilan Bawah
+   ## Tampilan Bawah
 <img src= "https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Desain%203D/Tampilan%20bawah.jpg">
 
-   >- Tampilan Depan
+   ## Tampilan Depan
 <img src= "https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Desain%203D/Tampilan%20depan.jpg">
 
-   >- Tampilan Samping
+   ## Tampilan Samping
 <img src= "https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Desain%203D/Tampilan%20samping.jpg">
