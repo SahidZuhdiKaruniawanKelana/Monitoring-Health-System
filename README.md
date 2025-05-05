@@ -1,4 +1,4 @@
-<img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Aset/Screenshot%202025-04-25%20201734.png">
+<img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Aset/Logo%20Startup.png">
 
 
 # Cliniscan
