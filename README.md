@@ -1,7 +1,9 @@
+## LOGO
 <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Aset/Logo%20Startup.png">
 
 
 # Cliniscan
+<img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Aset/Screenshot%202025-04-25%20201734.png">
 ## Monitoring-Health-System
 
 Proyek ini bertujuan untuk mengembangkan sistem pengecekan kesehatan tubuh untuk Smart Building, menggunakan komponen utama seperti Arduino, Sensor 30102, DS18B20, LCD 12C. Arduiino Uno bertindak sebagai mikroprosesor utama yang mengontrol komunikasi antar sensor dan perangkat, memungkinkan pemantauan dan pengontrolan secara real-time.
