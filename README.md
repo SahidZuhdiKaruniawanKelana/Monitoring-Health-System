@@ -78,7 +78,9 @@ https://www.youtube.com/watch?v=sizFK8IugYw
    https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Program/Codingan%20final
 
 ## Design UI UX
- <img src= "https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Program/UI%20UX%20design%20.png">
+ <img src= "https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Program/UI%20UX%20design%20.png"><br>
+ Link Figma https://www.figma.com/design/LsBj5VvYGfDPez1dcv42hC/Health-Dashboard--Community-?node-id=0-1&p=f&t=wFCRZY9jrgyQcvo2-0
+ 
 
 ## 3D Design
    ## Tampilan Bawah
