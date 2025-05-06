@@ -91,3 +91,7 @@ https://www.youtube.com/watch?v=sizFK8IugYw
 
    ## Tampilan Samping
 <img src= "https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Desain%203D/Tampilan%20samping.jpg">
+
+
+## Flyer
+<img src= "https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Dokumentasi/Flyer%20Cliniscan.jpg">
