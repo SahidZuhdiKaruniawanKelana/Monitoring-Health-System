@@ -27,7 +27,7 @@ CliniScan adalah alat pemantau kesehatan berbasis mikrokontroler yang dirancang 
 # Lecturer Profile
 
 <p align="center">
-  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Aset/foto/Foto%20team%20-%20Logo.jpg" alt="Dosen" width="200"/>
+  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Aset/foto/Mr%20Hendri.jpg" alt="Dosen" width="200"/>
 </p>
 <p  align="center"><b>
 Akhmad Hendriawan ST. MT.<br>
