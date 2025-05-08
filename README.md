@@ -44,14 +44,14 @@ NIP. 197501272002121003</b>
   <img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Team.jpg" alt="Foto Team" width="800"/>
 </p>
 
-| **No**       | **Name**  | **Role**      | **Managerial Role** |
+| **No**       | **Name**  | **Role**      |
 |------------|------|-----------------|----------------------|
-| 1      | Arfin Nurur Robbi   | Hardware Developer       | Project Assistant 1
-| 2        | M Suryo Nadi Pratama   | Back End Software Developer        | **Project Manager** |
-| 3    | Dwiky Bagus Setyawan   | Front End Software Developer       | Financial Manager |
-| 4 | M Fani Tafazzul Hilmi | Product Design | Project Assistant 2 |
-|5 | Ira Adi Nata | Firmware Development | Developer Manager |
-|6 | Rendy Firmansyah | Product Finalization | Vice Project Manager
+| 1      | Farhan Bayu Pamungkas   | Hardware Developer       |
+| 2        | Dariel Afron Zah Maulana   | Back End Software Developer| 
+| 3    | Akmal Aditya   | Front End Software Developer       |
+| 4 | Fiqinnajach Almakhi | Product Design |
+|5 | Muhammad Ammar Tsaqif | PCB Designer |
+|6 | Sahid Zuhdi Karuniawan Kelana | Product Finalization |
 
 # 💻 Hardware
 **Schematic Design**
