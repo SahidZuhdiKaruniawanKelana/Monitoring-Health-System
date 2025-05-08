@@ -72,7 +72,7 @@ NIP. 197501272002121003</b>
 # 🌐 Software
 **Flowchart**
 <p align="center">
-  <img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Flowchart.png" alt="Flowchart" width="300"/>
+  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Program/FlowChart%20Prototype.png" width="300"/>
 </p>
 
 **Tampilan Web**
