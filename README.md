@@ -93,32 +93,6 @@ NIP. 197501272002121003</b>
 </p>
 
 # 🌐 Software Prototype
-**Berikut adalah ilustrasi/prototype software dari produk kami :**
-
-[Figma](https://www.figma.com/design/u77I92tS5g2nEtg3ZSGG6L/IOT?m=auto&t=J4cFBzKeM5ls3Jz4-6)
-
-**Screenshots :**
-
-- Tampilan Web (Smartphone)
-
-<p align=center>
-<img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Login Page.png" alt="Login Page" width="150"/>
-<img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/sign up-1.png" alt="Daftar Akun" width="150"/>
-<img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Lupa Akun.png" alt="Lupa Akun" width="150"/>
-<img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Status Aman.png" alt="Status Aman" width="150"/>
-<img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Status Danger.png" alt="Status Danger" width="150"/>
-<img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Perangkat Null.png" alt="Status Null" width="150"/>
-</p>
-
-- Tampilan Web
-<p align=center>
-<img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Login Page-2.png" alt="Login Page" width="300"/>
-<img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Sign Up-1(1).png" alt="Daftar Akun" width="300"/>
-<img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Forgot Password.png" alt="Lupa Akun" width="300"/>
-<img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Status Aman-1.png" alt="Status Aman" width="300"/>
-<img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Status Danger-1.png" alt="Status Danger" width="300"/>
-<img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Status Null.png" alt="Status Null" width="300"/>
-</p>
 
 # 💵 Rincian Biaya
 
