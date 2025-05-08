@@ -5,27 +5,24 @@
   <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Aset/foto/20250508_214346.png" width="800"/>
 </p>
 
-CliniScan adalah alat pemantau kesehatan berbasis mikrokontroler yang dirancang untuk memonitor detak jantung dan suhu tubuh secara real-time.  Dengan memanfaatkan sensor biometrik, CliniScan memberikan data vital secara akurat dan langsung ditampilkan pada layar.  Alat ini dirancang untuk mendukung pemantauan kondisi tubuh secara praktis dan efisien, terutama dalam lingkungan sehari-hari.
+CliniScan adalah alat pemantau kesehatan berbasis mikrokontroler yang dirancang untuk memonitor detak jantung dan suhu tubuh secara real-time.  Dengan memanfaatkan sensor Max30100 dan DS18b20, CliniScan memberikan data vital secara akurat dan langsung ditampilkan pada layar monitoring .  Alat ini dirancang untuk mendukung pemantauan kondisi tubuh secara praktis dan efisien, terutama dalam lingkungan sehari-hari.
 
 
-# ❗ Disclaimer
-
-> ⚠️ **Note**: The sponsorship by "Good Day" is used as a placeholder for prototype branding and is not an actual sponsorship.
 
 # 🛠️ How It Works
 
-- **Real-time Data Collection**: The jacket uses sensors to continuously measure body temperature and heart rate.
-- **Firebase Integration**: Sensor data is uploaded to Firebase Realtime Database, chosen for its efficient and real-time data syncing capabilities.
-- **Fuzzification**: The collected data is processed using a fuzzification method, which helps determine the health status:
-  - **Safe**: Normal temperature and heart rate.
-  - **Danger**: Abnormal readings that indicate potential health issues.
-- **Decision-Making**: The system evaluates the fuzzified data to classify the user's status as either Safe or Danger, providing immediate feedback through the web application.
+- **Pengukuran Data Secara Real-Time**: CliniScan menggunakan sensor untuk memantau detak jantung dan suhu tubuh secara langsung dan terus-menerus.
+- **Pemrosesan Data**: Data yang dikumpulkan dari sensor akan diolah oleh mikrokontroler untuk menentukan kondisi kesehatan pengguna.
+- **Klasifikasi Status Kesehatan**: Sistem mengklasifikasikan status pengguna berdasarkan ambang batas tertentu:
+  - **Aman**: Detak jantung dan suhu tubuh berada dalam rentang normal.
+  - **Bahaya**: Terdapat penyimpangan yang dapat mengindikasikan masalah kesehatan.
+- **Tampilan Hasil**: Status kesehatan akan ditampilkan secara langsung melalui layar monitoring, sehingga pengguna dapat segera mengetahui kondisi tubuh mereka.
+
 
 # 🚀 Features
- **Real-time health monitoring**: Continuously measures body temperature and heartbeat.
-- **Firebase integration**: Stores and retrieves sensor data using Firebase Realtime Database.
-- **User authentication**: Ensures secure access to health data via deviceID and password.
-- **Web application interface**: Built with JavaScript, providing a simple and user-friendly experience.
+- **Pemantauan kesehatan real-time**: CliniScan secara terus-menerus mengukur suhu tubuh dan detak jantung pengguna.
+- **Penyimpanan lokal mikrokontroler**: Data sensor diproses dan ditampilkan langsung tanpa bergantung pada koneksi internet.
+- **Antarmuka LCD sederhana**: Informasi ditampilkan secara langsung melalui layar LCD, memberikan pengalaman pengguna yang praktis dan informatif.
 
 # Lecturer Profile
 
