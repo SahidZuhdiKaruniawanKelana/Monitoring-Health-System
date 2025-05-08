@@ -5,9 +5,8 @@
   <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Aset/foto/20250508_214346.png" width="800"/>
 </p>
 
-LifeSync is an embedded systems project aimed at developing a smart jacket that can monitor vital signs such as body temperature and heartbeat in real-time. The project features sensor integration and a companion web application that displays health data to ensure users can easily monitor their well-being.
+CliniScan adalah alat pemantau kesehatan berbasis mikrokontroler yang dirancang untuk memonitor detak jantung dan suhu tubuh secara real-time.  Dengan memanfaatkan sensor biometrik, CliniScan memberikan data vital secara akurat dan langsung ditampilkan pada layar.  Alat ini dirancang untuk mendukung pemantauan kondisi tubuh secara praktis dan efisien, terutama dalam lingkungan sehari-hari.
 
-This project is created as part of the Embedded Systems subject, supervised by Akhmad Hendriawan ST. MT. . The jacket's data is synced with a Firebase database, allowing users to view their vitals through a user-friendly interface.
 
 # ❗ Disclaimer
 
