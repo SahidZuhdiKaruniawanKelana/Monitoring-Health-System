@@ -77,8 +77,7 @@ NIP. 197501272002121003</b>
 
 **Tampilan GUI**
 <p align="center">
-  <img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Login.png" alt="Halaman Login" width="600"/>
-  <img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Dashboard.png" alt="Halaman Dashboard" width="600"/>
+  <img src="Program/Design UI UX/UI UX design .png" alt="Halaman Login" width="600"/>
 </p>
 
 
