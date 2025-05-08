@@ -1,4 +1,4 @@
-# Life Sync
+# Cliniscan
 <p align="center" style="font-size:38px"><strong>Sistem Monitoring Kesehatan Tubuh Berdasarkan Detak Jantung dan Suhu Tubuh</strong></p>
 
 <p align="center">
