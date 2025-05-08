@@ -75,22 +75,12 @@ NIP. 197501272002121003</b>
   <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Program/FlowChart%20Prototype.png" width="300"/>
 </p>
 
-**Tampilan Web**
+**Tampilan GUI**
 <p align="center">
   <img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Login.png" alt="Halaman Login" width="600"/>
   <img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Dashboard.png" alt="Halaman Dashboard" width="600"/>
 </p>
 
-# 💬 MQTT (Communication Protocol)
-Berikut adalah tampilan dari Broker (Shiftr.io) dari Lifesync :
-<p align="center">
-  <img src="https://github.com/suryoknadi/life-sync/raw/main/Foto Simulasi/MQTT-Shiftr.io.png" alt="Gambar Shiftr.io" width="300"/>
-</p>
-
-Berikut cara untuk mengirim data dari Broker (Shiftr.io) ke Firebase :
-<p align="center">
-  <img src="https://github.com/suryoknadi/life-sync/raw/main/MQTT/Add-Webhook.png" alt="Gambar Shiftr.io for sending data to Firebase" width="300"/>
-</p>
 
 # 💼 Product Prototype
 **Product Illustration**
