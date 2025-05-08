@@ -37,7 +37,7 @@ NIP. 197501272002121003</b>
 # 💰 The Stakeholders :
 
 <p align="center">
-  <img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Team.jpg" alt="Foto Team" width="800"/>
+  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Aset/foto/Foto%20team%20-%20Logo.jpg" alt="Foto Team" width="800"/>
 </p>
 
 | **No** | **Name**                          | **Role**                      |
