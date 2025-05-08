@@ -2,7 +2,7 @@
 <p align="center" style="font-size:38px"><strong>Sistem Monitoring Kesehatan Tubuh Berdasarkan Detak Jantung dan Suhu Tubuh berbasis Internet Of Things</strong></p>
 
 <p align="center">
-  <img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/LifeSync-White.png" alt="Logo Life Sync" width="800"/>
+  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Aset/foto/20250508_214346.png" width="800"/>
 </p>
 
 LifeSync is an embedded systems project aimed at developing a smart jacket that can monitor vital signs such as body temperature and heartbeat in real-time. The project features sensor integration and a companion web application that displays health data to ensure users can easily monitor their well-being.
