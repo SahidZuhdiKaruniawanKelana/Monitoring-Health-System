@@ -44,14 +44,15 @@ NIP. 197501272002121003</b>
   <img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Team.jpg" alt="Foto Team" width="800"/>
 </p>
 
-| **No**       | **Name**  | **Role**      |
-|------------|------|-----------------|----------------------|
-| 1      | Farhan Bayu Pamungkas   | Hardware Developer       |
-| 2        | Dariel Afron Zah Maulana   | Back End Software Developer| 
-| 3    | Akmal Aditya   | Front End Software Developer       |
-| 4 | Fiqinnajach Almakhi | Product Design |
-|5 | Muhammad Ammar Tsaqif | PCB Designer |
-|6 | Sahid Zuhdi Karuniawan Kelana | Product Finalization |
+| **No** | **Name**                          | **Role**                      |
+|--------|-----------------------------------|-------------------------------|
+| 1      | Farhan Bayu Pamungkas             | Hardware Developer            |
+| 2      | Dariel Afron Zah Maulana          | Back End Software Developer   |
+| 3      | Akmal Aditya                      | Front End Software Developer  |
+| 4      | Fiqinnajach Almakhi               | Product Designer              |
+| 5      | Muhammad Ammar Tsaqif             | PCB Designer                  |
+| 6      | Sahid Zuhdi Karuniawan Kelana     | Product Finalization          |
+
 
 # 💻 Hardware
 **Schematic Design**
