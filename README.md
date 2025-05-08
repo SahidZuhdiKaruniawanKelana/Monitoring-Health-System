@@ -66,7 +66,7 @@ NIP. 197501272002121003</b>
 **3D Design**
 
 <p align="center">
-  <img src="Assets/3D Viewer.png" alt="PCB 3D" width="300"/>
+  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Desain%203D/Desain%20Lanjutan/Desain%20Readme" width="300"/>
 </p>
 
 # 🌐 Software
