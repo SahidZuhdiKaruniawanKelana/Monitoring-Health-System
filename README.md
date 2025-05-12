@@ -75,6 +75,11 @@ NIP. 197501272002121003</b>
   <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Program/FlowChart%20Prototype.png" width="300"/>
 </p>
 
+**Blok Diagram**
+<p align="center">
+ <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Aset/foto/Blok%20Diagram.png" width="300"/>
+</p>
+
 **Tampilan GUI**
 <p align="center">
   <img src="Program/Design UI UX/UI UX design .png" alt="Halaman Login" width="600"/>
