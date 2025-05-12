@@ -77,7 +77,7 @@ NIP. 197501272002121003</b>
 
 **Blok Diagram**
 <p align="center">
- <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Aset/foto/Blok%20Diagram.png" width="300"/>
+ <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Aset/foto/BlokDiagram.png" width="300"/>
 </p>
 
 **Tampilan GUI**
