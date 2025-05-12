@@ -89,7 +89,7 @@ NIP. 197501272002121003</b>
 # 💼 Product Prototype
 **Product Illustration**
 <p align="center">
-  <img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Gambar Jaket.png" alt="Gambar Jaket" width="300"/>
+  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/Simulasi%20%20dan%20prototype/Protoype.jpg" width="300"/>
 </p>
 
 **Final Product**
