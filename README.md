@@ -94,7 +94,7 @@ NIP. 197501272002121003</b>
 
 **Final Product**
 <p align="center">
-  <img src="https://github.com/suryoknadi/life-sync/raw/main/foto & video product/foto product.jpeg" alt="Produk jadi tapi jelek" width="300"/>
+  <img src="" width="300"/>
 </p>
 
 # 🌐 Software Prototype
