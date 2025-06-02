@@ -1,0 +1,214 @@
+#include <Wire.h>
+#include "MAX30105.h"
+#include "heartRate.h"
+
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+#define ONE_WIRE_BUS 2
+#define BUZZER_PIN 3
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 32
+#define OLED_RESET -1
+#define SCREEN_ADDRESS 0x3C
+
+#define TEMP_SAMPLES 10
+#define HR_SAMPLES 10
+#define TEMP_SAMPLE_INTERVAL 100
+#define DISPLAY_UPDATE_INTERVAL 300  // Percepat update display jadi 300ms
+
+MAX30105 particleSensor;
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+long lastBeat = 0;
+float beatsPerMinute;
+float bpmValues[HR_SAMPLES];
+int bpmIndex = 0;
+bool bpmArrayFilled = false;
+float bpmAvg = 0;
+long irValue = 0;
+
+float tempValues[TEMP_SAMPLES];
+int tempIndex = 0;
+bool tempArrayFilled = false;
+float tempAvg = 0;
+float temperature = 0;
+unsigned long lastTempRead = 0;
+unsigned long lastDisplayUpdate = 0;
+
+void setup() {
+  Serial.begin(115200);
+  Wire.begin();
+  Wire.setClock(400000);  // I2C 400kHz
+
+  pinMode(BUZZER_PIN, OUTPUT);
+  digitalWrite(BUZZER_PIN, LOW);
+
+  if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
+    Serial.println(F("OLED gagal"));
+    while (1);
+  }
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  display.println("Inisialisasi...");
+  display.display();
+
+  for (int i = 0; i < TEMP_SAMPLES; i++) tempValues[i] = 0;
+  for (int i = 0; i < HR_SAMPLES; i++) bpmValues[i] = 0;
+
+  sensors.begin();
+  sensors.setWaitForConversion(false);
+  sensors.requestTemperatures();
+
+  if (!particleSensor.begin(Wire, I2C_SPEED_FAST)) {
+    Serial.println("MAX30105 tidak ditemukan");
+    while (1);
+  }
+
+  // Setting optimal untuk sampling cepat
+  particleSensor.setup(0x3F, 4, 2, 1000, 215, 4096);  // sampleRate 1000Hz (lebih cepat dari 800)
+  particleSensor.setPulseAmplitudeRed(0x3F);
+  particleSensor.setPulseAmplitudeGreen(0);
+  
+  display.clearDisplay();
+  display.setCursor(0, 0);
+  display.println("Siap mengukur!");
+  display.display();
+  delay(500);
+}
+
+void loop() {
+  unsigned long currentMillis = millis();
+
+  irValue = particleSensor.getIR();
+
+  if (irValue > 50000) {
+    if (checkForBeat(irValue)) {
+      long delta = currentMillis - lastBeat;
+      lastBeat = currentMillis;
+
+      if (delta > 300 && delta < 1500) {
+        beatsPerMinute = 60.0 / (delta / 1000.0);
+
+        bpmValues[bpmIndex] = beatsPerMinute;
+        bpmIndex++;
+        if (bpmIndex >= HR_SAMPLES) {
+          bpmIndex = 0;
+          bpmArrayFilled = true;
+        }
+
+        calculateBPMAverage();
+        Serial.print("BPM: ");
+        Serial.print(beatsPerMinute, 1);
+        Serial.print("\tAvg BPM: ");
+        Serial.println(bpmAvg, 1);
+      }
+    }
+
+    if (currentMillis - lastDisplayUpdate >= DISPLAY_UPDATE_INTERVAL) {
+      lastDisplayUpdate = currentMillis;
+      showHeartRate(beatsPerMinute, bpmAvg);
+    }
+
+    // Reset suhu saat baca detak jantung
+    tempIndex = 0;
+    tempArrayFilled = false;
+
+  } else {
+    if (currentMillis - lastTempRead >= TEMP_SAMPLE_INTERVAL) {
+      lastTempRead = currentMillis;
+
+      if (!sensors.isConversionComplete()) {
+        sensors.requestTemperatures();
+      } else {
+        temperature = sensors.getTempCByIndex(0);
+        if (temperature != DEVICE_DISCONNECTED_C) {
+          tempValues[tempIndex] = temperature;
+          tempIndex++;
+          if (tempIndex >= TEMP_SAMPLES) {
+            tempIndex = 0;
+            tempArrayFilled = true;
+          }
+          calculateTempAverage();
+
+          Serial.print("Temp: ");
+          Serial.print(temperature, 1);
+          Serial.print("\tAvg Temp: ");
+          Serial.println(tempAvg, 1);
+
+          sensors.requestTemperatures();
+        }
+      }
+    }
+
+    if (currentMillis - lastDisplayUpdate >= DISPLAY_UPDATE_INTERVAL) {
+      lastDisplayUpdate = currentMillis;
+      showTemperature(temperature, tempAvg);
+    }
+
+    // Reset detak jantung saat baca suhu
+    bpmIndex = 0;
+    bpmArrayFilled = false;
+  }
+
+  delay(10);  // Kurangi delay, cukup beri waktu stabilitas kecil agar loop lancar
+}
+
+void calculateBPMAverage() {
+  float sum = 0;
+  int count = bpmArrayFilled ? HR_SAMPLES : bpmIndex;
+  for (int i = 0; i < count; i++) {
+    sum += bpmValues[i];
+  }
+  bpmAvg = (count > 0) ? sum / count : 0;
+}
+
+void calculateTempAverage() {
+  float sum = 0;
+  int count = tempArrayFilled ? TEMP_SAMPLES : tempIndex;
+  for (int i = 0; i < count; i++) {
+    sum += tempValues[i];
+  }
+  tempAvg = (count > 0) ? sum / count : 0;
+}
+
+void showHeartRate(float bpm, float avg) {
+  digitalWrite(BUZZER_PIN, LOW);
+  display.clearDisplay();
+  display.setCursor(0, 0);
+  display.println("Detak Jantung:");
+  display.setCursor(0, 10);
+  display.print("BPM: ");
+  display.println(bpm, 1);
+  display.setCursor(0, 20);
+  display.print("Rata-rata: ");
+  display.println(avg, 1);
+  display.display();
+}
+
+void showTemperature(float tempC, float avg) {
+  if (tempC >= 33.0) {
+    digitalWrite(BUZZER_PIN, HIGH);
+    delay(100);
+    digitalWrite(BUZZER_PIN, LOW);
+  } else {
+    digitalWrite(BUZZER_PIN, LOW);
+  }
+
+  display.clearDisplay();
+  display.setCursor(0, 0);
+  display.print("Suhu Badan: ");
+  display.print(tempC, 1);
+  display.println(" C");
+  display.setCursor(0, 16);
+  display.print("Rata-rata: ");
+  display.print(avg, 1);
+  display.println(" C");
+  display.display();
+}
