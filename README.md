@@ -57,10 +57,10 @@ NIP. 197501272002121003</b>
   <img src="https://github.com/suryoknadi/life-sync/raw/main/Assets/Schematic.png" alt="Schematic" width="300"/>
 </p>
 
-**PCB Design**
+**PCB Design shield**
 <p align="center">
-  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/PCB%20Designer/DESIGN%20PCB.jpg" alt="PCB" 
-</p>
+  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/PCB%20Designer/DESIGN%20PCB.jpg" alt="PCB">
+    </p>
 
 **3D Design**
 
