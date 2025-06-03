@@ -101,7 +101,9 @@ PCB Jadi
 # 🌐 Software Prototype
 https://youtu.be/AOL8eu1ZVWA
 
-# Realisasi Program
+# 🌐 Realisasi Program
+[![Tonton Video](https://img.youtube.com/vi/bUS6ud4mv1k/maxresdefault.jpg)](https://youtu.be/bUS6ud4mv1k)
+
 https://youtu.be/bUS6ud4mv1k
 
 # Cara Kerja
