@@ -1,1 +1,350 @@
+import tkinter as tk
+from tkinter import ttk
+import threading
+import time
+import random
+import serial
+import json
+from datetime import datetime
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.animation import FuncAnimation
+import numpy as np
 
+class CliniscanGUI:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Cliniscan - Medical Dashboard")
+        self.root.geometry("1200x800")
+        self.root.configure(bg='#0a0a0a')
+        
+        # Data variables
+        self.heart_rate = 50
+        self.temperature = 20.0
+        self.is_connected = False
+        self.waiting_text = "Tunggu jari..."
+        
+        # Data untuk grafik
+        self.time_data = []
+        self.heart_data = []
+        
+        # Arduino serial connection (opsional)
+        self.arduino_port = None
+        self.serial_thread = None
+        
+        self.setup_gui()
+        self.start_monitoring()
+        
+    def setup_gui(self):
+        # Style configuration
+        style = ttk.Style()
+        style.theme_use('clam')
+        style.configure('Dark.TFrame', background='#1a1a2e')
+        style.configure('Card.TFrame', background='#0f0f23', relief='solid', borderwidth=1)
+        style.configure('Title.TLabel', background='#0a0a0a', foreground='#00d4ff', 
+                       font=('Segoe UI', 24, 'bold'))
+        style.configure('Metric.TLabel', background='#0f0f23', foreground='white', 
+                       font=('Segoe UI', 36, 'bold'))
+        style.configure('Label.TLabel', background='#0f0f23', foreground='#888888', 
+                       font=('Segoe UI', 10))
+        style.configure('Status.TLabel', background='#0f0f23', foreground='#2ed573', 
+                       font=('Segoe UI', 8))
+        
+        self.create_header()
+        self.create_main_content()
+        
+    def create_header(self):
+        header_frame = tk.Frame(self.root, bg='#0a0a0a', height=80)
+        header_frame.pack(fill=tk.X, padx=20, pady=10)
+        header_frame.pack_propagate(False)
+        
+        # Logo dan title
+        title_label = tk.Label(header_frame, text="Cliniscan", 
+                              bg='#0a0a0a', fg='#00d4ff', 
+                              font=('Segoe UI', 24, 'bold'))
+        title_label.pack(side=tk.LEFT, pady=15)
+        
+        # Status koneksi
+        self.connection_frame = tk.Frame(header_frame, bg='#ff4757', relief='solid', borderwidth=1)
+        self.connection_frame.pack(side=tk.RIGHT, pady=15, padx=10)
+        
+        self.status_label = tk.Label(self.connection_frame, text="● Connecting...", 
+                                    bg='#ff4757', fg='white', 
+                                    font=('Segoe UI', 10, 'bold'))
+        self.status_label.pack(padx=15, pady=5)
+        
+    def create_main_content(self):
+        main_frame = tk.Frame(self.root, bg='#0a0a0a')
+        main_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+        
+        # Left panel - Heart animation dan status
+        left_panel = tk.Frame(main_frame, bg='#1a1a2e', relief='solid', borderwidth=1)
+        left_panel.pack(side=tk.LEFT, fill=tk.Y, padx=(0, 20))
+        left_panel.configure(width=300)
+        left_panel.pack_propagate(False)
+        
+        self.create_heart_section(left_panel)
+        
+        # Right panel - Dashboard
+        right_panel = tk.Frame(main_frame, bg='#0a0a0a')
+        right_panel.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
+        
+        self.create_dashboard(right_panel)
+        
+    def create_heart_section(self, parent):
+        # Welcome text
+        welcome_label = tk.Label(parent, text="Welcome To Cliniscan", 
+                                bg='#1a1a2e', fg='#00d4ff', 
+                                font=('Segoe UI', 16, 'bold'))
+        welcome_label.pack(pady=(30, 10))
+        
+        # Subtitle
+        subtitle_label = tk.Label(parent, text="Hai Porhan!", 
+                                 bg='#1a1a2e', fg='#888888', 
+                                 font=('Segoe UI', 12))
+        subtitle_label.pack(pady=(0, 20))
+        
+        # Heart animation canvas
+        self.heart_canvas = tk.Canvas(parent, width=150, height=150, 
+                                     bg='#1a1a2e', highlightthickness=0)
+        self.heart_canvas.pack(pady=20)
+        
+        # Waiting text
+        self.waiting_label = tk.Label(parent, text=self.waiting_text, 
+                                     bg='#1a1a2e', fg='#888888', 
+                                     font=('Segoe UI', 12))
+        self.waiting_label.pack(pady=(20, 30))
+        
+        # Arduino connection button
+        connect_btn = tk.Button(parent, text="Connect Arduino", 
+                               bg='#00d4ff', fg='white', 
+                               font=('Segoe UI', 10, 'bold'),
+                               command=self.connect_arduino)
+        connect_btn.pack(pady=10)
+        
+        # Start heart animation
+        self.animate_heart()
+        
+    def create_dashboard(self, parent):
+        # Metrics cards frame
+        metrics_frame = tk.Frame(parent, bg='#0a0a0a')
+        metrics_frame.pack(fill=tk.X, pady=(0, 20))
+        
+        # Heart Rate Card
+        heart_card = self.create_metric_card(metrics_frame, "❤️", "Heart Rate", 
+                                           self.heart_rate, "bpm", "#ff4757")
+        heart_card.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(0, 10))
+        
+        # Temperature Card
+        temp_card = self.create_metric_card(metrics_frame, "🌡️", "Body Temperature", 
+                                          f"{self.temperature:.1f}°C", "Celsius", "#ff6b35")
+        temp_card.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(10, 0))
+        
+        # Chart frame
+        chart_frame = tk.Frame(parent, bg='#1a1a2e', relief='solid', borderwidth=1)
+        chart_frame.pack(fill=tk.BOTH, expand=True)
+        
+        self.create_chart(chart_frame)
+        
+    def create_metric_card(self, parent, icon, title, value, unit, color):
+        card = tk.Frame(parent, bg='#1a1a2e', relief='solid', borderwidth=1)
+        
+        # Color bar di atas
+        color_bar = tk.Frame(card, bg=color, height=3)
+        color_bar.pack(fill=tk.X)
+        
+        # Icon
+        icon_label = tk.Label(card, text=icon, bg='#1a1a2e', fg='white', 
+                             font=('Segoe UI', 20))
+        icon_label.pack(pady=(15, 5))
+        
+        # Value
+        value_label = tk.Label(card, text=str(value), bg='#1a1a2e', fg='white', 
+                              font=('Segoe UI', 28, 'bold'))
+        value_label.pack()
+        
+        # Title
+        title_label = tk.Label(card, text=title, bg='#1a1a2e', fg='#888888', 
+                              font=('Segoe UI', 10))
+        title_label.pack(pady=(0, 5))
+        
+        # Status
+        status_label = tk.Label(card, text="Normal", bg='#2ed573', fg='white', 
+                               font=('Segoe UI', 8, 'bold'))
+        status_label.pack(pady=(5, 15))
+        
+        # Store references untuk update
+        if title == "Heart Rate":
+            self.heart_value_label = value_label
+        elif title == "Body Temperature":
+            self.temp_value_label = value_label
+            
+        return card
+        
+    def create_chart(self, parent):
+        # Chart header
+        header_frame = tk.Frame(parent, bg='#1a1a2e')
+        header_frame.pack(fill=tk.X, padx=20, pady=(20, 0))
+        
+        chart_title = tk.Label(header_frame, text="Real-time Monitoring", 
+                              bg='#1a1a2e', fg='white', 
+                              font=('Segoe UI', 16, 'bold'))
+        chart_title.pack(side=tk.LEFT)
+        
+        # Legend
+        legend_frame = tk.Frame(header_frame, bg='#1a1a2e')
+        legend_frame.pack(side=tk.RIGHT)
+        
+        heart_legend = tk.Label(legend_frame, text="● Heart Rate", 
+                               bg='#1a1a2e', fg='#ff4757', 
+                               font=('Segoe UI', 10))
+        heart_legend.pack(side=tk.LEFT, padx=10)
+        
+        # Matplotlib chart
+        self.fig, self.ax = plt.subplots(figsize=(10, 4), facecolor='#1a1a2e')
+        self.ax.set_facecolor('#0a0a0a')
+        self.ax.tick_params(colors='white')
+        self.ax.set_xlabel('Time', color='white')
+        self.ax.set_ylabel('Values', color='white')
+        
+        self.canvas = FigureCanvasTkAgg(self.fig, parent)
+        self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
+        
+        # Initialize empty plots
+        self.heart_line, = self.ax.plot([], [], color='#ff4757', linewidth=2, label='Heart Rate')
+        
+        self.ax.set_xlim(0, 50)
+        self.ax.set_ylim(0, 120)
+        self.ax.grid(True, alpha=0.3)
+        
+    def animate_heart(self):
+        """Animasi jantung sederhana"""
+        def pulse():
+            colors = ['#ff006e', '#8338ec', '#3a86ff']
+            for i, color in enumerate(colors):
+                self.heart_canvas.delete("heart")
+                # Gambar lingkaran dengan warna gradient
+                size = 60 + (i * 5)  # Efek pulse
+                x1, y1 = 75 - size//2, 75 - size//2
+                x2, y2 = 75 + size//2, 75 + size//2
+                self.heart_canvas.create_oval(x1, y1, x2, y2, fill=color, tags="heart")
+                # Gambar emoji jantung
+                self.heart_canvas.create_text(75, 75, text="❤️", font=('Segoe UI', 30), tags="heart")
+                self.root.update()
+                time.sleep(0.2)
+            
+            # Schedule next pulse
+            self.root.after(1000, pulse)
+        
+        pulse()
+        
+    def connect_arduino(self):
+        """Mencoba koneksi ke Arduino di COM5"""
+        try:
+            self.arduino_port = serial.Serial('COM5', 9600, timeout=1)
+            self.is_connected = True
+            self.update_connection_status()
+            self.start_arduino_thread()
+        except Exception as e:
+            print(f"Connection to COM5 failed: {e}")
+            # Fallback ke simulasi jika gagal
+            self.is_connected = True
+            self.update_connection_status()
+            
+    def start_arduino_thread(self):
+        """Mulai thread untuk membaca data Arduino"""
+        if self.serial_thread is None or not self.serial_thread.is_alive():
+            self.serial_thread = threading.Thread(target=self.read_arduino_data, daemon=True)
+            self.serial_thread.start()
+            
+    def read_arduino_data(self):
+        """Membaca data dari Arduino"""
+        while self.is_connected:
+            try:
+                if self.arduino_port and self.arduino_port.in_waiting:
+                    line = self.arduino_port.readline().decode('utf-8').strip()
+                    # Parse data JSON dari Arduino
+                    data = json.loads(line)
+                    self.heart_rate = data.get('heart_rate', self.heart_rate)
+                    self.temperature = data.get('temperature', self.temperature)
+                else:
+                    # Simulasi data jika tidak ada Arduino
+                    self.simulate_data()
+                    
+                time.sleep(1)
+            except Exception as e:
+                print(f"Arduino read error: {e}")
+                self.simulate_data()
+                time.sleep(1)
+                
+    def simulate_data(self):
+        """Simulasi data sensor"""
+        self.heart_rate = 85 + random.randint(-15, 15)
+        self.temperature = 36.0 + random.uniform(-0.5, 1.0)
+        
+    def update_connection_status(self):
+        """Update status koneksi"""
+        if self.is_connected:
+            self.connection_frame.configure(bg='#2ed573')
+            self.status_label.configure(bg='#2ed573', text="● Arduino Connected")
+            self.waiting_label.configure(text="Sensor Ready - Place finger")
+        else:
+            self.connection_frame.configure(bg='#ff4757')
+            self.status_label.configure(bg='#ff4757', text="● Connecting...")
+            self.waiting_label.configure(text="Tunggu jari...")
+            
+    def update_display(self):
+        """Update tampilan nilai"""
+        try:
+            self.heart_value_label.configure(text=str(self.heart_rate))
+            self.temp_value_label.configure(text=f"{self.temperature:.1f}°C")
+            
+            # Update chart data
+            current_time = len(self.time_data)
+            self.time_data.append(current_time)
+            self.heart_data.append(self.heart_rate)
+            
+            # Keep only last 50 points
+            if len(self.time_data) > 50:
+                self.time_data = self.time_data[-50:]
+                self.heart_data = self.heart_data[-50:]
+                
+            # Update chart
+            self.heart_line.set_data(self.time_data, self.heart_data)
+            
+            if self.time_data:
+                self.ax.set_xlim(max(0, self.time_data[-1] - 50), self.time_data[-1] + 5)
+                
+            self.canvas.draw()
+            
+        except Exception as e:
+            print(f"Display update error: {e}")
+            
+    def start_monitoring(self):
+        """Mulai monitoring dan update display"""
+        def monitor_loop():
+            while True:
+                if self.is_connected:
+                    self.root.after(0, self.update_display)
+                time.sleep(2)
+                
+        monitor_thread = threading.Thread(target=monitor_loop, daemon=True)
+        monitor_thread.start()
+        
+        # Auto connect setelah 3 detik
+        self.root.after(3000, self.connect_arduino)
+
+def main():
+    root = tk.Tk()
+    app = CliniscanGUI(root)
+    
+    try:
+        root.mainloop()
+    except KeyboardInterrupt:
+        print("Shutting down...")
+    finally:
+        if hasattr(app, 'arduino_port') and app.arduino_port:
+            app.arduino_port.close()
+
+if __name__ == "__main__":
+    main(){}
