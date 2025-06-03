@@ -129,6 +129,6 @@ https://www.canva.com/design/DAGlpKlKbUI/rwsxZAOyYzx1ZmiQSskNvg/edit?utm_content
 # 🌐 Video Preview
 https://youtu.be/Ds7KlVZ7kMw
 # 🌐 Simulasi wokwi
-https://github.com/user-attachments/assets/5b63443b-ded7-4967-872f-879ffc754f0c
+[![Tonton Video](https://img.youtube.com/vi/AOL8eu1ZVWA/maxresdefault.jpg)](https://youtu.be/AOL8eu1ZVWA)
 
 https://wokwi.com/projects/430136088909636609
