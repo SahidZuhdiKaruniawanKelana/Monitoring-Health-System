@@ -127,5 +127,7 @@ https://www.canva.com/design/DAGlpKlKbUI/rwsxZAOyYzx1ZmiQSskNvg/edit?utm_content
 # 🌐 Video Preview
 https://youtu.be/Ds7KlVZ7kMw
 # 🌐 Simulasi wokwi
-[![Tonton Video](https://img.youtube.com/vi/AOL8eu1ZVWA/0.jpg)](https://youtu.be/AOL8eu1ZVWA)
+[![Tonton Video](https://img.youtube.com/vi/AOL8eu1ZVWA/0.jpg)](https://youtu.be/AOL8eu1ZVWA)  
+[![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/AOL8eu1ZVWA)
+
 https://wokwi.com/projects/430136088909636609
