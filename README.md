@@ -111,3 +111,9 @@ NIP. 197501272002121003</b>
 |Cetak PCB|1|10.000|10.000|
 |Cetak 3D|1|12.500|12.500|
 |Total Biaya|---|---|**184.500**|
+
+# 🌐 Link Presentasi Canva
+https://www.canva.com/design/DAGlpKlKbUI/rwsxZAOyYzx1ZmiQSskNvg/edit?utm_content=DAGlpKlKbUI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+# 🌐 Video Preview
+
