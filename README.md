@@ -99,15 +99,15 @@ PCB Jadi
 </p>
 
 # 🌐 Software Prototype
-https://youtu.be/AOL8eu1ZVWA
+Link Youtube: https://youtu.be/AOL8eu1ZVWA
 
 # 🌐 Realisasi Program
-[![Tonton Video](https://img.youtube.com/vi/bUS6ud4mv1k/maxresdefault.jpg)](https://youtu.be/bUS6ud4mv1k)
+https://github.com/user-attachments/assets/89dac77f-7542-4013-814b-a6df4c413755
+Link Youtube: https://youtu.be/bUS6ud4mv1k
 
-https://youtu.be/bUS6ud4mv1k
-
-# Cara Kerja
-https://youtube.com/shorts/00xpaAIdKis?feature=share
+# 🌐 Cara Kerja
+https://github.com/user-attachments/assets/06356922-0a25-4428-9938-26c5c88da9af
+Link Youtube: https://youtube.com/shorts/00xpaAIdKis?feature=share
 
 # 💵 Rincian Biaya
 
@@ -127,7 +127,8 @@ https://youtube.com/shorts/00xpaAIdKis?feature=share
 https://www.canva.com/design/DAGlpKlKbUI/rwsxZAOyYzx1ZmiQSskNvg/edit?utm_content=DAGlpKlKbUI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 # 🌐 Video Preview
-https://youtu.be/Ds7KlVZ7kMw
+https://github.com/user-attachments/assets/ae47b2bd-4c72-4982-bb75-b28a39751431
+Link Youtube: https://youtu.be/Ds7KlVZ7kMw
 # 🌐 Simulasi wokwi
-[![Tonton Video](https://img.youtube.com/vi/AOL8eu1ZVWA/maxresdefault.jpg)](https://youtu.be/AOL8eu1ZVWA)
-https://wokwi.com/projects/430136088909636609
+https://github.com/user-attachments/assets/c8ba4219-e30b-4996-9bfd-4bf6193c81ce
+Link Simulasi:https://wokwi.com/projects/430136088909636609
