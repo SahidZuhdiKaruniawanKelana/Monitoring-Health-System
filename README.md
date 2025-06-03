@@ -104,6 +104,9 @@ https://youtu.be/AOL8eu1ZVWA
 # Realisasi Program
 https://youtu.be/bUS6ud4mv1k
 
+# Cara Kerja
+https://youtube.com/shorts/00xpaAIdKis?feature=share
+
 # 💵 Rincian Biaya
 
 |**Item**|**Jumlah**|**Harga Satuan (Rp)**|**Total (Rp)**|
