@@ -58,9 +58,8 @@ NIP. 197501272002121003</b>
 </p>
 
 **PCB Design**
-  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/PCB%20Designer/DESIGN%20PCB.jpg" alt="PCB" width="300"/>
 <p align="center">
-  <img src="Assets/Layout PCB.png" alt="PCB" width="300"/>
+  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/PCB%20Designer/DESIGN%20PCB.jpg" alt="PCB" width="300"/>
 </p>
 
 **3D Design**
