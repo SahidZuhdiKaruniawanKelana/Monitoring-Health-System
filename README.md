@@ -79,7 +79,7 @@ NIP. 197501272002121003</b>
  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Aset/foto/BlokDiagram.png" width="300"/>
 </p>
 **PCB Jadi**
- <img src= "https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/Hasil/PCB%20jadi.jpg"
+ <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/Hasil/PCB%20jadi.jpg"
    width="300"/>
 **Tampilan GUI**
 <p align="center">
