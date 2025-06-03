@@ -129,10 +129,10 @@ Link Youtube: https://youtube.com/shorts/00xpaAIdKis?feature=share
 https://www.canva.com/design/DAGlpKlKbUI/rwsxZAOyYzx1ZmiQSskNvg/edit?utm_content=DAGlpKlKbUI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 # 🌐 Video Preview
-<p align="center">https://github.com/user-attachments/assets/ae47b2bd-4c72-4982-bb75-b28a39751431</p>
-
+https://github.com/user-attachments/assets/ae47b2bd-4c72-4982-bb75-b28a39751431
 
 Link Youtube: https://youtu.be/Ds7KlVZ7kMw
+
 # 🌐 Simulasi wokwi
 https://github.com/user-attachments/assets/c8ba4219-e30b-4996-9bfd-4bf6193c81ce
 
