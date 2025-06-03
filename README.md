@@ -59,7 +59,7 @@ NIP. 197501272002121003</b>
 
 **PCB Design shield**
 <p align="center">
-  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/PCB%20Designer/DESIGN%20PCB.jpg" alt="PCB">
+  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/PCB%20Designer/3D%20PCB%20shield%20github.png" alt="PCB">
     </p>
 
 **3D Design**
