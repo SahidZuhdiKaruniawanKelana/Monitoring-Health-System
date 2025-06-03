@@ -129,6 +129,4 @@ https://youtu.be/Ds7KlVZ7kMw
 # 🌐 Simulasi wokwi
 https://github.com/user-attachments/assets/5b63443b-ded7-4967-872f-879ffc754f0c
 
-j
-
 https://wokwi.com/projects/430136088909636609
