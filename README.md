@@ -116,4 +116,4 @@ NIP. 197501272002121003</b>
 https://www.canva.com/design/DAGlpKlKbUI/rwsxZAOyYzx1ZmiQSskNvg/edit?utm_content=DAGlpKlKbUI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 # 🌐 Video Preview
-
+https://youtu.be/Ds7KlVZ7kMw
