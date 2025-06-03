@@ -103,7 +103,7 @@ Link Youtube: https://youtu.be/AOL8eu1ZVWA
 
 # 🌐 Realisasi Program
 <p align="center">
-  <img src="https://link-ke-video-atau-gif.gif" alt="video" width="500">
+  <img src="https://github.com/user-attachments/assets/89dac77f-7542-4013-814b-a6df4c413755" width="500">
 </p>
 
 Link Youtube: https://youtu.be/bUS6ud4mv1k
