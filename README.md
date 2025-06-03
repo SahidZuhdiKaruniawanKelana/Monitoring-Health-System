@@ -80,7 +80,7 @@ NIP. 197501272002121003</b>
 </p>
 **PCB Jadi**
  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/Hasil/PCB%20jadi.jpg"
-   width="300"/>
+   
 **Tampilan GUI**
 <p align="center">
   <img src="Program/Design UI UX/UI UX design .png" alt="Halaman Login" width="600"/>
