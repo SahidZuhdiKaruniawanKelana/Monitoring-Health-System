@@ -102,8 +102,6 @@ PCB Jadi
 Link Youtube: https://youtu.be/AOL8eu1ZVWA
 
 # 🌐 Realisasi Program
-https://github.com/user-attachments/assets/89dac77f-7542-4013-814b-a6df4c413755
-
 <p align="center">
   <b>https://github.com/user-attachments/assets/89dac77f-7542-4013-814b-a6df4c413755</b>
 </p>
