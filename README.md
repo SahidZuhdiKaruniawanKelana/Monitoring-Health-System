@@ -99,7 +99,8 @@ PCB Jadi
 </p>
 
 # 🌐 Software Prototype
-[Hardware/Simulasi  dan prototype/Video Simulasi.mp4](https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/Simulasi%20%20dan%20prototype/Video%20Simulasi.mp4](https://youtu.be/AOL8eu1ZVWA)
+https://youtu.be/AOL8eu1ZVWA
+
 # 💵 Rincian Biaya
 
 |**Item**|**Jumlah**|**Harga Satuan (Rp)**|**Total (Rp)**|
