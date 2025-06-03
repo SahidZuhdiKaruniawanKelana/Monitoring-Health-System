@@ -100,7 +100,10 @@ PCB Jadi
 
 # 🌐 Software Prototype
 https://youtu.be/AOL8eu1ZVWA
-#Realisasi Program
+
+# Realisasi Program
+https://youtu.be/bUS6ud4mv1k
+
 # 💵 Rincian Biaya
 
 |**Item**|**Jumlah**|**Harga Satuan (Rp)**|**Total (Rp)**|
