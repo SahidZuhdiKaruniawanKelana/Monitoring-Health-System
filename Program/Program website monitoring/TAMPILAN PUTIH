@@ -1,0 +1,611 @@
+import customtkinter as ctk
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import threading
+import time
+import serial
+from serial.tools import list_ports
+import queue
+import datetime
+
+# Setup modern theme
+ctk.set_appearance_mode("light")
+ctk.set_default_color_theme("blue")
+
+class CliniScan(ctk.CTk):
+    def __init__(self):
+        super().__init__()
+        self.title("CliniScan - Patient Monitoring Dashboard")
+        self.geometry("1000x650")
+        self.configure(fg_color="#ffffff")
+        self.resizable(False, False)
+        
+        # Fullscreen state
+        self.is_fullscreen = False
+        
+        # Initialize data with default values
+        self.heart_rate = 0
+        self.temperature = 0
+        self.health_status = "Waiting for data..."
+        
+        # Data for graphs
+        self.heart_data = [0] * 60
+        self.temp_data = [0] * 60
+        
+        # Serial connection
+        self.serial_port = None
+        self.serial_thread = None
+        self.running = True
+        self.data_queue = queue.Queue()
+        
+        # Setup UI
+        self.setup_ui()
+        
+        # Start serial connection thread
+        self.start_serial_connection()
+        
+        # Start data processing thread
+        self.start_data_processing()
+    
+    def toggle_fullscreen(self):
+        """Toggle fullscreen mode"""
+        self.is_fullscreen = not self.is_fullscreen
+        self.attributes("-fullscreen", self.is_fullscreen)
+        
+        if self.is_fullscreen:
+            self.fullscreen_btn.configure(text="Exit Fullscreen")
+        else:
+            self.fullscreen_btn.configure(text="Fullscreen")
+    
+    def start_serial_connection(self):
+        """Initialize serial connection to Arduino"""
+        try:
+            # Try specific port first (COM5 in this case)
+            port = 'COM5'
+            print(f"Trying to connect to port: {port}")
+            
+            try:
+                self.serial_port = serial.Serial(port, 9600, timeout=1)
+                time.sleep(2)  # Wait for connection to establish
+                
+                # Test if connection is working
+                if self.serial_port.in_waiting > 0:
+                    print(f"Connection successful at baud rate: 9600")
+                else:
+                    self.serial_port.close()
+                    raise Exception("No data received from port")
+                
+            except Exception as e:
+                print(f"Failed connection to {port}: {e}")
+                
+                # Fallback to auto-detection if specific port fails
+                print("Trying auto-detection...")
+                arduino_ports = [
+                    p.device
+                    for p in list_ports.comports()
+                    if 'Arduino' in p.description or 'CH340' in p.description
+                ]
+                
+                if not arduino_ports:
+                    print("Arduino not found by description. Trying available ports...")
+                    ports = list(list_ports.comports())
+                    if ports:
+                        # Use first available port if Arduino not specifically detected
+                        arduino_ports = [ports[0].device]
+                    else:
+                        self.health_status = "No serial ports available!"
+                        self.update_vital_displays()
+                        return
+                
+                port = arduino_ports[0]
+                print(f"Trying auto-detected port: {port}")
+                
+                try:
+                    self.serial_port = serial.Serial(port, 9600, timeout=1)
+                    time.sleep(2)
+                except Exception as e:
+                    print(f"Auto-detection failed: {e}")
+                    self.health_status = f"Connection error: {str(e)}"
+                    self.update_vital_displays()
+                    return
+            
+            # Start thread to read serial data
+            self.serial_thread = threading.Thread(target=self.read_serial_data, daemon=True)
+            self.serial_thread.start()
+            
+            # Update connection status
+            self.connection_label.configure(
+                text=f"Arduino: Connected to {port}",
+                text_color="#28a745"
+            )
+            
+        except Exception as e:
+            print(f"Error during connection: {e}")
+            self.health_status = f"Connection error: {str(e)}"
+            self.update_vital_displays()
+    
+    def read_serial_data(self):
+        """Read data from Arduino via serial connection"""
+        buffer = ""
+        print("Serial reading thread started...")
+        
+        while self.running and self.serial_port and self.serial_port.is_open:
+            try:
+                if self.serial_port.in_waiting > 0:
+                    # Read byte by byte to prevent data truncation
+                    byte = self.serial_port.read().decode('utf-8', errors='replace')
+                    
+                    # Add to buffer until newline is found
+                    if byte == '\n':
+                        if buffer:
+                            print(f"Raw data received: {buffer}")
+                            self.data_queue.put(buffer)
+                            buffer = ""
+                    else:
+                        buffer += byte
+                else:
+                    # Faster polling for better response
+                    time.sleep(0.01)
+            except Exception as e:
+                print(f"Serial read error: {e}")
+                time.sleep(0.1)
+    
+    def start_data_processing(self):
+        """Start thread to process incoming data"""
+        self.processing_thread = threading.Thread(target=self.process_queue_data, daemon=True)
+        self.processing_thread.start()
+    
+    def process_queue_data(self):
+        """Process data from the queue"""
+        while self.running:
+            try:
+                if not self.data_queue.empty():
+                    data = self.data_queue.get()
+                    self.process_serial_data(data)
+                time.sleep(0.01)
+            except Exception as e:
+                print(f"Queue processing error: {e}")
+    
+    def process_serial_data(self, data):
+        """Process incoming data from Arduino"""
+        try:
+            data = data.strip()
+            print(f"Processing data: {data}")
+            
+            # Parse based on Arduino output format:
+            # "BPM: X" or "Temperature: Y"
+            if "BPM:" in data:
+                try:
+                    heart_rate = float(data.split("BPM:")[1].strip())
+                    
+                    # Check if value is reasonable
+                    if 20 <= heart_rate <= 200:
+                        self.heart_rate = heart_rate
+                        
+                        # Update data for graphs
+                        self.heart_data = self.heart_data[1:] + [self.heart_rate]
+                        
+                        # Update health status
+                        self.update_health_status()
+                        
+                        # Update UI on main thread
+                        self.after(10, self.update_vital_displays)
+                        self.after(10, self.update_graphs)
+                        
+                        print(f"Processed data: HR={self.heart_rate}")
+                    else:
+                        print(f"Invalid heart rate value (out of range): {heart_rate}")
+                except ValueError:
+                    print(f"Could not convert heart rate value: {data}")
+                    
+            elif "Temperature:" in data:
+                try:
+                    temperature = float(data.split("Temperature:")[1].strip())
+                    
+                    # Check if value is reasonable
+                    if 15 <= temperature <= 45:
+                        self.temperature = temperature
+                        
+                        # Update data for graphs
+                        self.temp_data = self.temp_data[1:] + [self.temperature]
+                        
+                        # Update health status
+                        self.update_health_status()
+                        
+                        # Update UI on main thread
+                        self.after(10, self.update_vital_displays)
+                        self.after(10, self.update_graphs)
+                        
+                        print(f"Processed data: Temp={self.temperature}")
+                    else:
+                        print(f"Invalid temperature value (out of range): {temperature}")
+                except ValueError:
+                    print(f"Could not convert temperature value: {data}")
+            else:
+                print(f"Unknown data format: {data}")
+                
+        except Exception as e:
+            print(f"Data processing error: {e}")
+    
+    def update_health_status(self):
+        """Determine health status based on vital signs"""
+        heart_normal = 60 <= self.heart_rate <= 100
+        temp_normal = 36 <= self.temperature <= 37.2
+        
+        if not heart_normal and not temp_normal:
+            self.health_status = "Critical Condition"
+        elif not heart_normal:
+            self.health_status = "High/Low Heart Rate"
+        elif not temp_normal:
+            self.health_status = "Abnormal Temperature"
+        else:
+            self.health_status = "Good Condition"
+    
+    def update_graphs(self):
+        """Update the graphs with new data"""
+        if hasattr(self, 'heart_line'):
+            try:
+                self.heart_line.set_ydata(self.heart_data)
+                self.temp_line.set_ydata(self.temp_data)
+                
+                # Redraw the canvas
+                self.canvas.draw_idle()
+            except Exception as e:
+                print(f"Graph update error: {e}")
+    
+    def setup_ui(self):
+        # Main layout
+        self.grid_columnconfigure(0, weight=1)
+        
+        # Create main content area
+        self.main_frame = ctk.CTkFrame(self, fg_color="#f8f9fa", corner_radius=15)
+        self.main_frame.pack(fill="both", expand=True, padx=20, pady=20)
+        
+        # Header
+        self.setup_header()
+        
+        # Vitals cards
+        self.setup_vitals_cards()
+        
+        # Graphs
+        self.setup_graphs()
+        
+        # Additional stats
+        self.setup_additional_stats()
+    
+    def setup_header(self):
+        header_frame = ctk.CTkFrame(self.main_frame, fg_color="#e9ecef", corner_radius=10, height=60)
+        header_frame.pack(fill="x", padx=15, pady=(15, 5))
+        
+        # App title
+        ctk.CTkLabel(
+            header_frame,
+            text="CliniScan",
+            font=("Helvetica", 35, "bold"),
+            text_color="#0066cc"
+        ).pack(side="left", padx=20, pady=10)
+        
+        # Fullscreen button
+        self.fullscreen_btn = ctk.CTkButton(
+            header_frame,
+            text="Fullscreen",
+            command=self.toggle_fullscreen,
+            font=("Helvetica", 12),
+            fg_color="#0066cc",
+            hover_color="#0052a3",
+            width=100
+        )
+        self.fullscreen_btn.pack(side="right", padx=(10, 20), pady=10)
+        
+        # Connection status
+        self.connection_label = ctk.CTkLabel(
+            header_frame,
+            text="Arduino: Disconnected",
+            font=("Helvetica", 16),
+            text_color="#dc3545"
+        )
+        self.connection_label.pack(side="right", padx=10, pady=10)
+    
+    def setup_vitals_cards(self):
+        cards_frame = ctk.CTkFrame(self.main_frame, fg_color="transparent")
+        cards_frame.pack(fill="x", padx=15, pady=10)
+        
+        # Create a grid of 1x3 for the cards
+        cards_frame.grid_columnconfigure((0, 1, 2), weight=1)
+        cards_frame.grid_rowconfigure(0, weight=1)
+        
+        # Heart Rate Card
+        self.heart_card = self.create_vital_card(
+            cards_frame, 
+            "❤", 
+            "Heart Rate", 
+            f"{self.heart_rate}", 
+            "bpm", 
+            "Waiting",
+            "#dc3545",
+            gradient_colors=["#f8d7da", "#dc3545"],
+            row=0, column=0
+        )
+        
+        # Temperature Card
+        self.temp_card = self.create_vital_card(
+            cards_frame, 
+            "🌡", 
+            "Temperature", 
+            f"{self.temperature}", 
+            "°C", 
+            "Waiting",
+            "#fd7e14",
+            gradient_colors=["#fdebd0", "#fd7e14"],
+            row=0, column=1
+        )
+        
+        # Health Status Card
+        self.health_card = self.create_vital_card(
+            cards_frame, 
+            "✓", 
+            "Health Status", 
+            self.health_status, 
+            "", 
+            "",  # No status text needed
+            "#28a745",
+            gradient_colors=["#d4edda", "#28a745"],
+            row=0, column=2
+        )
+    
+    def create_vital_card(self, parent, icon, title, value, unit, status, color, gradient_colors, row, column):
+        card = ctk.CTkFrame(
+            parent,
+            fg_color=gradient_colors[0],
+            corner_radius=15,
+            height=120,
+            border_width=2,
+            border_color="#dee2e6"
+        )
+        card.grid(row=row, column=column, padx=10, pady=10, sticky="nsew")
+        
+        # Title with icon
+        title_frame = ctk.CTkFrame(card, fg_color="transparent")
+        title_frame.pack(fill="x", padx=15, pady=(10, 5))
+        
+        icon_label = ctk.CTkLabel(
+            title_frame,
+            text=icon,
+            font=("Helvetica", 18)
+        )
+        icon_label.pack(side="left", padx=(0, 5))
+        
+        ctk.CTkLabel(
+            title_frame,
+            text=title,
+            font=("Helvetica", 14, "bold"),
+            text_color="#212529"
+        ).pack(side="left")
+        
+        # Value display
+        value_frame = ctk.CTkFrame(card, fg_color="transparent")
+        value_frame.pack(fill="x", padx=15, pady=5)
+        
+        value_label = ctk.CTkLabel(
+            value_frame,
+            text=value,
+            font=("Helvetica", 28, "bold"),
+            text_color="#212529"
+        )
+        value_label.pack(side="left")
+        
+        if unit:  # Only add unit if provided
+            ctk.CTkLabel(
+                value_frame,
+                text=unit,
+                font=("Helvetica", 12),
+                text_color="#6c757d"
+            ).pack(side="left", padx=(5, 0), pady=(8, 0))
+        
+        # Status indicator
+        status_frame = ctk.CTkFrame(card, fg_color="transparent")
+        status_frame.pack(fill="x", padx=15, pady=(5, 10))
+        
+        # Create a status indicator circle
+        status_indicator = ctk.CTkFrame(
+            status_frame,
+            width=10,
+            height=10,
+            corner_radius=5,
+            fg_color="#ffc107" if status == "Waiting" else ("#28a745" if status == "Normal" else "#dc3545")
+        )
+        
+        status_indicator.pack(side="left", padx=(0, 5))
+        
+        status_label = ctk.CTkLabel(
+            status_frame,
+            text=status,
+            font=("Helvetica", 12),
+            text_color="#6c757d"
+        )
+        status_label.pack(side="left")
+        
+        return {
+            "card": card,
+            "value_label": value_label,
+            "status_label": status_label,
+            "status_indicator": status_indicator
+        }
+    
+    def setup_graphs(self):
+        graphs_frame = ctk.CTkFrame(self.main_frame, fg_color="#ffffff", corner_radius=10, border_width=2, border_color="#dee2e6")
+        graphs_frame.pack(fill="both", expand=True, padx=15, pady=10)
+        
+        # Title
+        ctk.CTkLabel(
+            graphs_frame,
+            text="Real-Time Monitoring",
+            font=("Helvetica", 16, "bold"),
+            text_color="#212529"
+        ).pack(anchor="w", padx=15, pady=(10, 5))
+        
+        # Use matplotlib for the graphs
+        self.fig, self.axes = plt.subplots(1, 2, figsize=(15, 3.5), dpi=80)
+        self.fig.set_facecolor('#ffffff')
+        self.fig.subplots_adjust(wspace=0.3)
+        
+        # Configure each graph
+        graph_configs = [
+            {
+                "ax": self.axes[0],
+                "title": "Heart Rate (BPM)",
+                "data": self.heart_data,
+                "color": "#dc3545",
+                "ylim": (50, 150)
+            },
+            {
+                "ax": self.axes[1],
+                "title": "Body Temperature (°C)",
+                "data": self.temp_data,
+                "color": "#fd7e14",
+                "ylim": (15, 39)
+            }
+        ]
+        
+        self.graph_lines = []
+        
+        for config in graph_configs:
+            ax = config["ax"]
+            ax.set_facecolor('#ffffff')
+            ax.set_title(config["title"], color='#212529', fontsize=12, fontweight='bold')
+            ax.set_ylim(config["ylim"])
+            
+            # Style the graph
+            for spine in ax.spines.values():
+                spine.set_color('#dee2e6')
+            
+            ax.tick_params(axis='x', colors='#6c757d', labelsize=8)
+            ax.tick_params(axis='y', colors='#6c757d', labelsize=9)
+            ax.grid(color='#e9ecef', linestyle='-', linewidth=0.5, alpha=0.7)
+            
+            # Plot the data
+            line, = ax.plot(config["data"], color=config["color"], linewidth=2)
+            self.graph_lines.append(line)
+        
+        # Assign lines to class variables for updates
+        self.heart_line = self.graph_lines[0]
+        self.temp_line = self.graph_lines[1]
+        
+        # Embed in tkinter
+        self.canvas = FigureCanvasTkAgg(self.fig, master=graphs_frame)
+        self.canvas.get_tk_widget().configure(highlightthickness=0)
+        self.canvas.get_tk_widget().pack(fill="both", expand=True, padx=10, pady=10)
+
+    def setup_additional_stats(self):
+        stats_frame = ctk.CTkFrame(self.main_frame, fg_color="#e9ecef", corner_radius=10, height=60, border_width=1, border_color="#dee2e6")
+        stats_frame.pack(fill="x", padx=15, pady=(5, 15))
+        
+        # Add monitoring time
+        self.monitoring_time_label = ctk.CTkLabel(
+            stats_frame,
+            text="Monitoring Time: 00:00:00",
+            font=("Helvetica", 12),
+            text_color="#6c757d"
+        )
+        self.monitoring_time_label.pack(side="left", padx=15, pady=15)
+        
+        # Add refresh connection button
+        self.refresh_btn = ctk.CTkButton(
+            stats_frame,
+            text="Refresh Connection",
+            command=self.refresh_connection,
+            font=("Helvetica", 12),
+            fg_color="#0066cc",
+            hover_color="#0052a3",
+            width=120
+        )
+        self.refresh_btn.pack(side="right", padx=15, pady=15)
+        
+        # Start time for monitoring duration
+        self.start_time = time.time()
+        self.update_monitoring_time()
+    
+    def refresh_connection(self):
+        """Refresh serial connection"""
+        try:
+            if self.serial_port and self.serial_port.is_open:
+                self.serial_port.close()
+                time.sleep(0.5)
+            
+            self.connection_label.configure(
+                text="Arduino: Reconnecting...",
+                text_color="#ffc107"
+            )
+            
+            self.start_serial_connection()
+        except Exception as e:
+            print(f"Error during connection refresh: {e}")
+    
+    def update_monitoring_time(self):
+        """Update the monitoring time display"""
+        if self.running:
+            elapsed = time.time() - self.start_time
+            hours = int(elapsed // 3600)
+            minutes = int((elapsed % 3600) // 60)
+            seconds = int(elapsed % 60)
+            self.monitoring_time_label.configure(
+                text=f"Monitoring Time: {hours:02d}:{minutes:02d}:{seconds:02d}"
+            )
+            self.after(1000, self.update_monitoring_time)
+    
+    def update_vital_displays(self):
+        """Update all vital signs displays with current data"""
+        # Update heart rate display
+        self.heart_card["value_label"].configure(text=f"{self.heart_rate:.1f}")
+        hr_status = "Normal" if 60 <= self.heart_rate <= 100 else "Warning"
+        self.heart_card["status_label"].configure(
+            text=hr_status,
+            text_color="#6c757d" if hr_status == "Normal" else "#dc3545"
+        )
+        self.heart_card["status_indicator"].configure(
+            fg_color="#28a745" if hr_status == "Normal" else "#dc3545"
+        )
+        
+        # Update temperature display
+        self.temp_card["value_label"].configure(text=f"{self.temperature:.1f}")
+        temp_status = "Normal" if 36 <= self.temperature <= 37.2 else "Warning"
+        self.temp_card["status_label"].configure(
+            text=temp_status,
+            text_color="#6c757d" if temp_status == "Normal" else "#dc3545"
+        )
+        self.temp_card["status_indicator"].configure(
+            fg_color="#28a745" if temp_status == "Normal" else "#dc3545"
+        )
+        
+        # Update health status display
+        self.health_card["value_label"].configure(text=self.health_status)
+        is_good = "Good" in self.health_status
+        is_warning = "High/Low" in self.health_status or "Abnormal" in self.health_status
+        
+        status_color = "#28a745" if is_good else ("#ffc107" if is_warning else "#dc3545")
+        self.health_card["status_indicator"].configure(fg_color=status_color)
+        
+        # Update connection status
+        if self.serial_port and self.serial_port.is_open:
+            port_name = self.serial_port.port.split('/')[-1]  # Get just the port name
+            self.connection_label.configure(
+                text=f"Arduino: Connected to {port_name}",
+                text_color="#28a745"
+            )
+        else:
+            self.connection_label.configure(
+                text="Arduino: Disconnected",
+                text_color="#dc3545"
+            )
+    
+    def on_closing(self):
+        """Clean up when closing the application"""
+        self.running = False
+        if self.serial_port and self.serial_port.is_open:
+            self.serial_port.close()
+        self.destroy()
+
+if __name__ == "__main__":
+    app = CliniScan()
+    app.protocol("WM_DELETE_WINDOW", app.on_closing)
+    app.mainloop()
