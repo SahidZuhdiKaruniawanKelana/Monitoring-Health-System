@@ -129,11 +129,7 @@ Link Youtube: https://youtube.com/shorts/00xpaAIdKis?feature=share
 https://www.canva.com/design/DAGlpKlKbUI/rwsxZAOyYzx1ZmiQSskNvg/edit?utm_content=DAGlpKlKbUI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 # 🌐 Video Preview
-<p align="center">
-  <a href="https://youtu.be/AOL8eu1ZVWA" target="_blank">
-    <img src="https://github.com/user-attachments/assets/ae47b2bd-4c72-4982-bb75-b28a39751431" alt="Video Thumbnail" width="480" />
-  </a>
-</p>
+<p align="center">https://github.com/user-attachments/assets/ae47b2bd-4c72-4982-bb75-b28a39751431</p>
 
 
 Link Youtube: https://youtu.be/Ds7KlVZ7kMw
