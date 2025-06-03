@@ -99,7 +99,7 @@ PCB Jadi
 </p>
 
 # 🌐 Software Prototype
-
+Hardware/Simulasi  dan prototype/Video Simulasi.mp4
 # 💵 Rincian Biaya
 
 |**Item**|**Jumlah**|**Harga Satuan (Rp)**|**Total (Rp)**|
