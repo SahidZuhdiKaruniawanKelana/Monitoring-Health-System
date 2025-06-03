@@ -81,9 +81,6 @@ NIP. 197501272002121003</b>
 PCB Jadi
  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Hardware/Hasil/PCB%20jadi.jpg"
 
-Simulasi
-https://wokwi.com/projects/430136088909636609
-
 **Tampilan GUI**
 <p align="center">
   <img src="Program/Design UI UX/UI UX design .png" alt="Halaman Login" width="600"/>
@@ -122,3 +119,5 @@ https://www.canva.com/design/DAGlpKlKbUI/rwsxZAOyYzx1ZmiQSskNvg/edit?utm_content
 
 # 🌐 Video Preview
 https://youtu.be/Ds7KlVZ7kMw
+# 🌐 Simulasi wokwi
+https://wokwi.com/projects/430136088909636609
