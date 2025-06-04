@@ -137,3 +137,8 @@ Link Youtube: https://youtu.be/Ds7KlVZ7kMw
 https://github.com/user-attachments/assets/c8ba4219-e30b-4996-9bfd-4bf6193c81ce
 
 Link Simulasi:https://wokwi.com/projects/430136088909636609
+
+# Flyer
+<p align="center">
+  <img src="https://github.com/SahidZuhdiKaruniawanKelana/Monitoring-Health-System/blob/main/Aset/foto/flyer_SHM.jpg"/>
+</p>
